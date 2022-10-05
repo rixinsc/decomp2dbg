@@ -11,10 +11,13 @@ from .utils import *
 from .symbol_mapper import SymbolMapper
 from .decompiler_pane import DecompilerPane
 
+class CustomParser(argparse.ArgumentParser):
+    def exit(self, status=0, message=None):
+        raise argparse.ArgumentError(message)
+
 #
 # Decompiler Client Interface
 #
-
 
 class GDBDecompilerClient(DecompilerClient):
     def __init__(self, gdb_client, name="decompiler", host="127.0.0.1", port=3662):
@@ -173,7 +176,8 @@ class DecompilerCommand(gdb.Command):
 
     @staticmethod
     def _init_arg_parser():
-        parser = argparse.ArgumentParser(exit_on_error=False)
+        # parser = argparse.ArgumentParser(exit_on_error=False)
+        parser = CustomParser()
         commands = ["connect", "disconnect", "info"]
         parser.add_argument(
             'command', type=str, choices=commands, help="""
@@ -194,7 +198,7 @@ class DecompilerCommand(gdb.Command):
             '--host', type=str, default="localhost"
         )
         parser.add_argument(
-            '--port', type=int, default=3662
+            '--port', type=int, default=36620
         )
         parser.add_argument(
             '--base-addr-start', type=lambda x: int(x,0)

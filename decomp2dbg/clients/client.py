@@ -12,7 +12,7 @@ def only_if_connected(f):
 
 
 class DecompilerClient:
-    def __init__(self, name="decompiler", host="localhost", port=3662, native_sym_support=True):
+    def __init__(self, name="decompiler", host="localhost", port=36620, native_sym_support=True):
         self.name = name
         self.host = host
         self.port = port

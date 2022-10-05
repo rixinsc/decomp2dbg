@@ -80,7 +80,7 @@ class ConfigDialog(QDialog):
         port_label = QLabel(self)
         port_label.setText("Port")
         self._port_edit = QLineEdit(self)
-        self._port_edit.setText("3662")
+        self._port_edit.setText("36620")
         upper_layout.addWidget(port_label, row, 0)
         upper_layout.addWidget(self._port_edit, row, 1)
         row += 1
